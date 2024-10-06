@@ -31,7 +31,7 @@ typedef struct{
 	int index;
 }studIndex;
 
-studIndex* getExamPassers(student*, int, int);
+studIndex* getExamPassers(student *students, int numStuds, int );
 
 int main(void)
 {
@@ -47,17 +47,21 @@ int main(void)
 	    {{"Ian", 'J', "Taylor"}, "19109012", "BSIS", 'M', {{{30, 100}, {40, 100}, {60, 100}, {70, 100}}, 4 }},
 	    {{"Julia", 'K', "Anderson"}, "18101234", "BSCS", 'F', {{{90, 100}, {85, 100}, {70, 100}, {40, 100}}, 4 }}
 	};
+
 	int numStuds = sizeof(students) / sizeof(student);
 
 	studIndex* exam1Passers;
-	studIndex* exam2Passers;
-	studIndex* exam3Passers;
-	studIndex* exam4Passers;
-	studIndex* exam5Passers;
 
-
-    printf("Enter ");
-
+    printf("Code");
 
 	return 0;
 }
+
+// Write the code for the function getExamPassers().
+// The function will receive an array of students, the number of students, 
+// and an integer from 0-3 which indicates which of the four major exams to check. 
+// The function will iterate through the list of students to find their scores for 
+// the specified exam. The function will store into an array of studIndex the idnumbers 
+// and indices of the students who got a score
+// that is at least 60% of the total score. Return the array of studIndex to the calling function. Let the member "index"
+// of the array of studIndex contain a -1 to serve as a sentinel value.
