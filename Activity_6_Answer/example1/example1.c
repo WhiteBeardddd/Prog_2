@@ -77,7 +77,7 @@ void updateStudent(Student *students, int size)
         strcpy(students[index-1].name, newName);
         students[index-1].age = newAge;
     }else{
-        printf("Invalid student number\n");
+        printf("Invalid student number\n\n");
         return;
     }
     printf("\n");
@@ -89,25 +89,27 @@ void deleteStudent(Student *students, int *size)
     
     printf("\n");
 
-    if(size == 0){
-        printf("No students in the List to delete\n");
+    if(*size == 0){
+        printf("No students in the List to delete\n\n");
         return;
     }
 
     printf("Enter student number to delete (1 to %d): ", *size);
     scanf("%d", &index);
     
-    if(index - 1 > *size && index - 1 < 0){
-        printf("Invalid number to delete");
+    if(index > *size || index < 0){
+        printf("Invalid number to delete\n\n");
+    }else{
+        for (int i = index; i < *size; i++)
+        {                                
+            students[i - 1] = students[i];
+        }
+        (*size)--;
+        printf("Student %d deleted successfully!!\n\n", index);
     }
 
     printf("\n");
 
-    for (int i = index; i < *size - 1; i++)
-    {                                
-        students[i - 1] = students[i + 1];
-    }
-    (*size)--;
 }
 
 int main()
@@ -142,10 +144,10 @@ int main()
             readStudents(students, size);
             break;
         case 5:
-            printf("Exiting Program...");
+            printf("Exiting Program...\n");
             break;
         default:
-            printf("Invalid input...");
+            printf("Invalid input! Choose again!...\n");
         }
     }while(choice != 5);
 

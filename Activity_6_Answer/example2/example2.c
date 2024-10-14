@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
+#define MAX 50
 #define MAX_BOOKS 100 // Define a constant for the maximum number of books
 
 // Define a struct for a Book
@@ -13,8 +15,31 @@ typedef struct
 } Book;
 
 // Function to create a book (Add to the array)
-void createBook(Book books[], int *size, const char *title, const char *author, int year, const char *isbn)
+void createBook(Book *books, int *size)
 {
+    char title[MAX];
+    char author[MAX];
+    char isbn[MAX];
+    int year;
+
+    printf("\n");
+    printf("Enter Book Title: ");
+    fgets(title, sizeof(title), stdin);
+    title[strcspn(title, "\n")] = '\0';
+
+    printf("Enter Book Author: ");
+    fgets(author, sizeof(author), stdin);
+    author[strcspn(author, "\n")] = '\0';
+    
+    printf("Enter Book ISBN: ");
+    fgets(isbn, sizeof(isbn), stdin);
+    isbn[strcspn(isbn, "\n")] = '\0';
+
+    printf("Enter Book year of Publication: ");
+    scanf("%d", &year);
+    
+
+    printf("\n");
     strcpy(books[*size].title, title);   // Copy the provided title into the title field of the book at the current size index
     strcpy(books[*size].author, author); // Copy the provided author into the author field of the book at the current size index
     books[*size].year = year;            // Assign the provided year to the year field of the book at the current size index
@@ -23,30 +48,39 @@ void createBook(Book books[], int *size, const char *title, const char *author, 
 }
 
 // Function to read all books (Display the array)
-void readBooks(Book books[], int size)
+void readBooks(Book *books, int size)
 {
+    printf("\n");
     for (int i = 0; i < size; i++)
     { // Iterate through all books
         printf("Book %d: Title = %s, Author = %s, Year = %d, ISBN = %s\n",
                i + 1, books[i].title, books[i].author, books[i].year, books[i].isbn); // Print the details of each book
     }
+    printf("\n");
 }
 
 // Function to find a book by ISBN (Search)
-int findBookByISBN(Book books[], int size, const char *isbn)
-{
+int findBookByISBN(Book *books, int size){
+    char isbn[MAX];
+
+    printf("Enter Book's ISBN to find: ");
+    fgets(isbn, sizeof(isbn), stdin);
+    isbn[strcspn(isbn, "\n")] = '0';
+
     for (int i = 0; i < size; i++)
     { // Iterate through all books
         if (strcmp(books[i].isbn, isbn) == 0)
         {             // Compare the provided ISBN with the ISBN of the current book
-            return i; // Return the index of the book if found
+            return i;
+        }else{
+            printf("Book not Found\n\n");
+            return; // Return -1 if the book is not found
         }
     }
-    return -1; // Return -1 if the book is not found
 }
 
 // Function to update a book's details by ISBN
-void updateBookByISBN(Book books[], int size, const char *isbn, const char *newTitle, const char *newAuthor, int newYear)
+void updateBookByISBN(Book *books, int size)
 {
     int index = findBookByISBN(books, size, isbn); // Find the index of the book with the specified ISBN
     if (index != -1)
@@ -63,9 +97,9 @@ void updateBookByISBN(Book books[], int size, const char *isbn, const char *newT
 }
 
 // Function to delete a book by ISBN
-void deleteBookByISBN(Book books[], int *size, const char *isbn)
+void deleteBookByISBN(Book *books, int *size)
 {
-    int index = findBookByISBN(books, *size, isbn); // Find the index of the book with the specified ISBN
+    int index = findBookByISBN(books, *size); // Find the index of the book with the specified ISBN
     if (index != -1)
     { // If the book was found
         for (int i = index; i < *size - 1; i++)
@@ -85,28 +119,42 @@ int main()
 {
     Book books[MAX_BOOKS]; // Create an array to store up to 100 books
     int size = 0;          // Initialize the current number of books to 0
+    int choice;
 
-    // Create books (Add)
-    createBook(books, &size, "The Great Gatsby", "F. Scott Fitzgerald", 1925, "9780743273565");
-    createBook(books, &size, "To Kill a Mockingbird", "Harper Lee", 1960, "9780060935467");
-    createBook(books, &size, "1984", "George Orwell", 1949, "9780451524935");
+    do{
+        printf("Library Management System: \n");
+        printf("1. Add new Book\n");
+        printf("2. Update Book\n");
+        printf("3. Delete Book\n");
+        printf("4. Display books\n");
+        printf("5. Find Book by ISBN\n");
+        printf("6. Exit Program\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        getchar();
 
-    // Read all books (Display)
-    printf("After Adding Books:\n");
-    readBooks(books, size);
-
-    // Update a book by ISBN (Update)
-    updateBookByISBN(books, size, "9780060935467", "To Kill a Mockingbird (Updated)", "Harper Lee", 1961);
-    printf("\nAfter Updating To Kill a Mockingbird:\n");
-    readBooks(books, size);
-
-    // Delete a book by ISBN (Delete)
-    deleteBookByISBN(books, &size, "9780451524935");
-    printf("\nAfter Deleting 1984:\n");
-    readBooks(books, size);
-
-    // Attempt to delete a book that doesn't exist
-    deleteBookByISBN(books, &size, "9789999999999");
+        switch (choice)
+        {
+        case 1:
+            createBook(books, &size);
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            readBooks(books, size);
+            break;
+        case 5:
+            findBookByISBN(books, size);
+            break;
+        case 6:
+            printf("Exitting Program....");
+            return 0;
+        default:
+            break;
+        }
+    }while(choice != 6);
 
     return 0;
 }
