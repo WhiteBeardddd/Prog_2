@@ -74,7 +74,7 @@ int findBookByISBN(Book *books, int size){
             return i;
         }else{
             printf("Book not Found\n\n");
-            return; // Return -1 if the book is not found
+            return; 
         }
     }
 }
@@ -82,17 +82,35 @@ int findBookByISBN(Book *books, int size){
 // Function to update a book's details by ISBN
 void updateBookByISBN(Book *books, int size)
 {
-    int index = findBookByISBN(books, size, isbn); // Find the index of the book with the specified ISBN
+    char newTitle[MAX];
+    char newAuthor[MAX];
+    char newYear[MAX];
+    int index;
+    printf("Enter Book's ISBN to update: ");
+
+
+
     if (index != -1)
     {                                           // If the book was found
+        printf("Enter Book Title: ");
+        fgets(newTitle, sizeof(newTitle), stdin);
+        newTitle[strcspn(newTitle, "\n")] = '\0';
+
+        printf("Enter Book Author: ");
+        fgets(newAuthor, sizeof(newAuthor), stdin);
+        newAuthor[strcspn(newAuthor, "\n")] = '\0';
+
+        printf("Enter Book year of Publication: ");
+        scanf("%d", &newYear);
+
         strcpy(books[index].title, newTitle);   // Update the title
         strcpy(books[index].author, newAuthor); // Update the author
         books[index].year = newYear;            // Update the year
-        printf("Book with ISBN %s updated successfully.\n", isbn);
+        printf("Book with ISBN %s updated successfully.\n", books[index].isbn);
     }
     else
     {
-        printf("Book with ISBN %s not found.\n", isbn);
+        printf("Book with ISBN %s not found.\n", books[index].isbn);
     }
 }
 
