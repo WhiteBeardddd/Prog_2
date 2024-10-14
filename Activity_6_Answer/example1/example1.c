@@ -10,10 +10,10 @@ typedef struct
 } Student;
 
 // Function to create a student (Add to the array)
-void createStudent(Student students[], int *size)
+void createStudent(Student *students, int *size)
 {
     int age;
-    char name[MAX];
+    char name[50];
     
     if(*size >= 10){
         printf("Student List is full: ");
@@ -25,19 +25,15 @@ void createStudent(Student students[], int *size)
     name[strcspn(name, "\n")] = '\0';
 
     printf("Enter Student's age: ");
-    if (scanf("%d", &age) != 1) {
-        printf("Invalid age input.\n");
-        // Clear the input buffer (not strictly necessary since we won't use it again)
-        while (getchar() != '\n');
-        return;
-    }
+    scanf("%d", &age);
+
     strcpy(students[*size].name, name); // Copy the provided name into the name field of the student at the current size index
     students[*size].age = age;          // Assign the provided age to the age field of the student at the current size index
     (*size)++;                          // Increment the size to indicate a new student has been added
 }
 
 // Function to read all students (Display the array)
-void readStudents(Student students[], int size)
+void readStudents(Student *students, int size)
 {
     if(size == 0){
         printf("No students are on the list!!");
@@ -51,9 +47,10 @@ void readStudents(Student students[], int size)
 }
 
 // Function to update a student's details by index
-void updateStudent(Student students[], int size)
+void updateStudent(Student *students, int size)
 {
-    int newAge, index;
+    int newAge; 
+    int index;
     char newName[MAX];
 
     if(size == 0){
@@ -81,7 +78,7 @@ void updateStudent(Student students[], int size)
 }
 
 // Function to delete a student (Remove from the array)
-void deleteStudent(Student students[], int *size)
+void deleteStudent(Student *students, int *size)
 {
     int index;
 
@@ -116,6 +113,7 @@ int main()
         printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        getchar();
 
         switch(choice)
         {
@@ -141,3 +139,4 @@ int main()
 
     return 0;
 }
+

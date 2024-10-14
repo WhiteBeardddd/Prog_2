@@ -6,14 +6,15 @@ typedef struct {
     int age;
 } Student;
 
+
 void createStudent(Student students[], int *size) {
+    char name[50];
+    int age;
+
     if (*size >= 10) {
         printf("Student list is full. Can't add more students.\n");
         return;
     }
-
-    char name[50];
-    int age;
 
     printf("Enter Student Name: ");
     fgets(name, sizeof(name), stdin);
