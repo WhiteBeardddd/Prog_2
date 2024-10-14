@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #define MAX 50
 
 // Define a struct for Student
@@ -12,6 +13,7 @@ typedef struct
 // Function to create a student (Add to the array)
 void createStudent(Student *students, int *size)
 {
+    printf("\n");
     int age;
     char name[50];
     
@@ -27,6 +29,7 @@ void createStudent(Student *students, int *size)
     printf("Enter Student's age: ");
     scanf("%d", &age);
 
+    printf("\n");
     strcpy(students[*size].name, name); // Copy the provided name into the name field of the student at the current size index
     students[*size].age = age;          // Assign the provided age to the age field of the student at the current size index
     (*size)++;                          // Increment the size to indicate a new student has been added
@@ -35,6 +38,7 @@ void createStudent(Student *students, int *size)
 // Function to read all students (Display the array)
 void readStudents(Student *students, int size)
 {
+    printf("\n");
     if(size == 0){
         printf("No students are on the list!!");
         return;
@@ -44,6 +48,7 @@ void readStudents(Student *students, int size)
     {                                                                                          // Iterate through all students
         printf("Student %d: Name = %s, Age = %d\n", i + 1, students[i].name, students[i].age); // Print the details of each student
     }
+    printf("\n");
 }
 
 // Function to update a student's details by index
@@ -52,6 +57,8 @@ void updateStudent(Student *students, int size)
     int newAge; 
     int index;
     char newName[MAX];
+    
+    printf("\n");
 
     if(size == 0){
         printf("No students in the List to update");
@@ -75,12 +82,15 @@ void updateStudent(Student *students, int size)
         printf("Invalid student number");
         return;
     }
+    printf("\n");
 }
 
 // Function to delete a student (Remove from the array)
 void deleteStudent(Student *students, int *size)
 {
     int index;
+    
+    printf("\n");
 
     if(size == 0){
         printf("No students in the List to delete");
@@ -89,6 +99,8 @@ void deleteStudent(Student *students, int *size)
 
     printf("Enter student number to delete (1 to %d): ", size);
     scanf("%d", &index);
+    
+    printf("\n");
 
     for (int i = index; i < *size - 1; i++)
     {                                  // Iterate from the index to be deleted to the last element
