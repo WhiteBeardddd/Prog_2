@@ -17,16 +17,20 @@ void createStudent(Student students[], int *size)
     
     if(*size >= 10){
         printf("Student List is full: ");
+        return;
     }
 
-
     printf("Enter Student's name: ");
-    scanf("%s", name);
-    name[strcspn(name, "\n")] = '0';
+    fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = '\0';
 
     printf("Enter Student's age: ");
-    scanf("%d", &age);
-
+    if (scanf("%d", &age) != 1) {
+        printf("Invalid age input.\n");
+        // Clear the input buffer (not strictly necessary since we won't use it again)
+        while (getchar() != '\n');
+        return;
+    }
     strcpy(students[*size].name, name); // Copy the provided name into the name field of the student at the current size index
     students[*size].age = age;          // Assign the provided age to the age field of the student at the current size index
     (*size)++;                          // Increment the size to indicate a new student has been added
