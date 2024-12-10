@@ -1,0 +1,15 @@
+Transaction ID: 5
+ Book ID: 4 Borrower's Name: David
+ Action: 0
+Transaction ID: 4
+ Book ID: 1 Borrower's Name: Alice
+ Action: 1
+Transaction ID: 3
+ Book ID: 3 Borrower's Name: Charlie
+ Action: 0
+Transaction ID: 2
+ Book ID: 2 Borrower's Name: Bob
+ Action: 0
+Transaction ID: 1
+ Book ID: 1 Borrower's Name: Alice
+ Action: 0

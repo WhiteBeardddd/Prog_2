@@ -1,0 +1,20 @@
+Book ID: 5
+ Title: A Song of Ice and Fire Status = 0
+ Borrower's Name 
+ Borrow Date: 0
+Book ID: 4
+ Title: Game of Thrones Status = 1
+ Borrower's Name David
+ Borrow Date: 20
+Book ID: 3
+ Title: To Kill a Mockingbird Status = 2
+ Borrower's Name Charlie
+ Borrow Date: 40
+Book ID: 2
+ Title: 1984 Status = 2
+ Borrower's Name Bob
+ Borrow Date: 35
+Book ID: 1
+ Title: The Great Gatsby Status = 0
+ Borrower's Name 
+ Borrow Date: 0
